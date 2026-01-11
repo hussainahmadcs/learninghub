@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Hussain Alibrahim - Software Engineering & Machine Learning</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #e2e8f0;
+        }
+
+        nav .logo span {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #667eea;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            top: -300px;
+            right: -300px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(30px) rotate(180deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: slideDown 1s ease-out;
+        }
+
+        .hero .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            animation: slideUp 1s ease-out 0.3s both;
+            opacity: 0.95;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: slideUp 1s ease-out 0.5s both;
+            opacity: 0.9;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            animation: slideUp 1s ease-out 0.7s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #667eea;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Course Grid */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .course-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .course-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-card h3 {
+            color: #e2e8f0;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-card p {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .course-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .course-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-course-btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .view-course-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Course Detail View */
+        .course-detail {
+            display: none;
+            background: #1e293b;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+            border: 2px solid #667eea;
+        }
+
+        .course-detail.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .course-detail h3 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .topic-card {
+            background: #0f172a;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .topic-card:hover {
+            background: #1e293b;
+            transform: translateX(10px);
+        }
+
+        .topic-card h4 {
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .topic-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .topic-status {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.3rem 0.8rem;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: #334155;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #475569;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            margin: 0 auto;
+        }
+
+        .about-text h3 {
+            color: #e2e8f0;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .expertise-tag {
+            padding: 0.6rem 1.2rem;
+            background: #334155;
+            color: #e2e8f0;
+            border-radius: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid #334155;
+            margin-top: 5rem;
+        }
+
+        footer p {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero .subtitle { font-size: 1.3rem; }
+            nav ul { gap: 1rem; font-size: 0.9rem; }
+            .course-grid { grid-template-columns: 1fr; }
+            .about-content { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">Dr. <span>Hussain Alibrahim</span></div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to My Learning Hub</h1>
+            <p class="subtitle">Dr. Hussain Alibrahim</p>
+            <p class="description">Software Engineering | Machine Learning | Interactive Education</p>
+            <div class="cta-buttons">
+                <a href="#courses" class="cta-button">Explore Courses</a>
+                <a href="#about" class="cta-button secondary">About Me</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses">
+        <h2>Available Courses</h2>
+        <p class="section-description">
+            Comprehensive courses with interactive animations and hands-on learning experiences
+        </p>
+
+        <div class="course-grid" id="courseGrid">
+            <!-- Python Programming Course -->
+            <div class="course-card" onclick="showCourseDetail('python')">
+                <div class="course-icon">🐍</div>
+                <h3>Python Programming</h3>
+                <p>Master Python from basics to advanced concepts with interactive visual animations. Perfect for beginners and intermediate learners.</p>
+                <div class="course-stats">
+                    <span>📚 12 Topics</span>
+                    <span>⏱️ Self-paced</span>
+                </div>
+                <button class="view-course-btn">View Course →</button>
+            </div>
+
+            <!-- Machine Learning Course -->
+            <div class="course-card" onclick="showCourseDetail('ml')">
+                <div class="course-icon">🤖</div>
+                <h3>Machine Learning</h3>
+                <p>Learn ML algorithms, neural networks, and deep learning with practical implementations and visual explanations.</p>
+                <div class="course-stats">
+                    <span>📚 15 Topics</span>
+                    <span>⏱️ Self-paced</span>
+                </div>
+                <button class="view-course-btn">View Course →</button>
+            </div>
+
+            <!-- Software Engineering Course -->
+            <div class="course-card" onclick="showCourseDetail('se')">
+                <div class="course-icon">💻</div>
+                <h3>Software Engineering</h3>
+                <p>Explore software design patterns, architecture, best practices, and modern development methodologies.</p>
+                <div class="course-stats">
+                    <span>📚 10 Topics</span>
+                    <span>⏱️ Self-paced</span>
+                </div>
+                <button class="view-course-btn">View Course →</button>
+            </div>
+
+            <!-- Data Structures Course -->
+            <div class="course-card" onclick="showCourseDetail('ds')">
+                <div class="course-icon">🗂️</div>
+                <h3>Data Structures & Algorithms</h3>
+                <p>Master fundamental data structures and algorithms with animated visualizations and problem-solving techniques.</p>
+                <div class="course-stats">
+                    <span>📚 14 Topics</span>
+                    <span>⏱️ Self-paced</span>
+                </div>
+                <button class="view-course-btn">View Course →</button>
+            </div>
+        </div>
+
+        <!-- Course Detail Views -->
+        <div id="pythonDetail" class="course-detail">
+            <button class="back-btn" onclick="hideCourseDetail()">← Back to Courses</button>
+            <h3>🐍 Python Programming Topics</h3>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h4>Variables & Data Types</h4>
+                    <p>Learn how Python stores and manages different types of data</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>If-Else Statements</h4>
+                    <p>Master conditional logic and decision-making in Python</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>For & While Loops</h4>
+                    <p>Understand iteration and repetition with visual examples</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Functions</h4>
+                    <p>Create reusable code blocks and understand parameters</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Lists & Tuples</h4>
+                    <p>Work with Python's most common data structures</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Dictionaries</h4>
+                    <p>Master key-value pairs and hash tables</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>File Operations</h4>
+                    <p>Read, write, and manipulate files in Python</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Object-Oriented Programming</h4>
+                    <p>Classes, objects, inheritance, and polymorphism</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="mlDetail" class="course-detail">
+            <button class="back-btn" onclick="hideCourseDetail()">← Back to Courses</button>
+            <h3>🤖 Machine Learning Topics</h3>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h4>Introduction to ML</h4>
+                    <p>Understand machine learning fundamentals and types</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Linear Regression</h4>
+                    <p>Learn your first ML algorithm with visualizations</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Logistic Regression</h4>
+                    <p>Classification problems and decision boundaries</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Neural Networks</h4>
+                    <p>Deep learning fundamentals and backpropagation</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Decision Trees</h4>
+                    <p>Tree-based algorithms and ensemble methods</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Clustering Algorithms</h4>
+                    <p>K-means, hierarchical clustering, and more</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="seDetail" class="course-detail">
+            <button class="back-btn" onclick="hideCourseDetail()">← Back to Courses</button>
+            <h3>💻 Software Engineering Topics</h3>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h4>Design Patterns</h4>
+                    <p>Common patterns: Singleton, Factory, Observer, etc.</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>SOLID Principles</h4>
+                    <p>Write maintainable and scalable code</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Agile Methodologies</h4>
+                    <p>Scrum, Kanban, and modern development practices</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Software Architecture</h4>
+                    <p>Microservices, monoliths, and system design</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="dsDetail" class="course-detail">
+            <button class="back-btn" onclick="hideCourseDetail()">← Back to Courses</button>
+            <h3>🗂️ Data Structures & Algorithms Topics</h3>
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <h4>Arrays & Strings</h4>
+                    <p>Basic operations and manipulation techniques</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Linked Lists</h4>
+                    <p>Single, double, and circular linked lists</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Stacks & Queues</h4>
+                    <p>LIFO and FIFO data structures</p>
+                    <span class="topic-status">Interactive</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Binary Trees</h4>
+                    <p>Tree traversal and binary search trees</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+                <div class="topic-card">
+                    <h4>Sorting Algorithms</h4>
+                    <p>Bubble, merge, quick sort visualizations</p>
+                    <span class="topic-status">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Dr. Hussain Alibrahim</h2>
+        <div class="about-content">
+            <div class="about-image">👨‍🏫</div>
+            <div class="about-text">
+                <h3>Educator & Software Engineer</h3>
+                <p>
+                    Welcome! I'm Dr. Hussain Alibrahim, passionate about making complex programming concepts accessible through interactive animations and visual learning.
+                </p>
+                <p>
+                    My mission is to help students and professionals master software engineering, machine learning, and programming through engaging, hands-on experiences.
+                </p>
+                <div class="expertise">
+                    <span class="expertise-tag">Python Programming</span>
+                    <span class="expertise-tag">Machine Learning</span>
+                    <span class="expertise-tag">Software Engineering</span>
+                    <span class="expertise-tag">Data Science</span>
+                    <span class="expertise-tag">Algorithms</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p><strong>Contact Me</strong></p>
+        <p>Email: dr.hussain@example.com</p>
+        <div class="social-links">
+            <a href="#" title="LinkedIn">🔗</a>
+            <a href="#" title="GitHub">💻</a>
+            <a href="#" title="Twitter">🐦</a>
+            <a href="#" title="YouTube">📺</a>
+        </div>
+        <p style="margin-top: 2rem;">© 2026 Dr. Hussain Alibrahim - All Rights Reserved</p>
+    </footer>
+
+    <script>
+        function showCourseDetail(courseId) {
+            // Hide all course details
+            document.querySelectorAll('.course-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Hide course grid
+            document.getElementById('courseGrid').style.display = 'none';
+            
+            // Show selected course detail
+            const detailId = courseId + 'Detail';
+            document.getElementById(detailId).classList.add('active');
+            
+            // Scroll to course detail
+            document.getElementById(detailId).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function hideCourseDetail() {
+            // Hide all course details
+            document.querySelectorAll('.course-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Show course grid
+            document.getElementById('courseGrid').style.display = 'grid';
+            
+            // Scroll back to courses
+            document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
